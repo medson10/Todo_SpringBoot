@@ -15,8 +15,7 @@ public class Task {
     private String content;
     private long hours;
 
-    public Task(long id, String content) {
-        this.id = id;
+    public void setContent(String content) {
         this.content = content;
     }
 
