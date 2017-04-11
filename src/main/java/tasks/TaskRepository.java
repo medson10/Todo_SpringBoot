@@ -8,5 +8,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource(collectionResourceRel = "task", path = "task")
 public interface TaskRepository extends CrudRepository<Task, Long> {
-    Task findById(@Param("id") long id);
+    Task findByHours(@Param("hours") long hours);
 }
