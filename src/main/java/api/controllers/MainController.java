@@ -1,17 +1,14 @@
-package tasks;
+package api.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
-public class TaskController {
+public class MainController {
 
     @RequestMapping("/")
     public String index() {
-        return "Hey, It's me";
+        return "Hello World";
     }
 
     

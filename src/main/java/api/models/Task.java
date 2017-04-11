@@ -1,4 +1,4 @@
-package java;
+package api.models;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,11 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import com.sun.java.util.jar.pack.Package.Class.Member;
-
-
 @Entity
-public class Task {
+public class Task implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,7 +36,6 @@ public class Task {
         this.status = status;
     }
     
-
     public long getId() {
         return id;
     }
@@ -52,7 +48,7 @@ public class Task {
         return hours;
     }
     
-    public long getStatus() {
+    public String getStatus() {
         return status;
     }
 

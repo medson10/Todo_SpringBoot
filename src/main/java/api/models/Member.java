@@ -1,4 +1,4 @@
-package java;
+package api.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import com.sun.java.util.jar.pack.Package.Class.Member;
 
 @Entity
 public class Member implements Serializable {
@@ -27,7 +26,7 @@ public class Member implements Serializable {
     private long age;
 
     @ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name="Member_Task",joinColumns={@joinColumn(name="TASK_ID")},inverseJoinColumns={@JoinColumn(name="MEMBER_ID")})
+	@JoinTable(name="Member_Task",joinColumns={@JoinColumn(name="TASK_ID")},inverseJoinColumns={@JoinColumn(name="MEMBER_ID")})
 	private List <Task> tasks = new ArrayList <Task>();
 
     @ManyToOne
@@ -60,7 +59,7 @@ public class Member implements Serializable {
 		return tasks;
 	}
 
-    public Pessoa getTeam() {
+    public Team getTeam() {
         return team;
     }
     public void setTeam(Team team) {

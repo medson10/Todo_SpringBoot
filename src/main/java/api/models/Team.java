@@ -1,4 +1,4 @@
-package java;
+package api.models;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.sun.java.util.jar.pack.Package.Class.Member;
 
 @Entity
 public class Team implements Serializable {
