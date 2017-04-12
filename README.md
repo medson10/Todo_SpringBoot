@@ -14,3 +14,10 @@ A Todo Api built with Spring Boot
 * ```
     mvn clean -Dspring.profiles.active-dev spring-boot:run
   ```
+
+## How to run with docker
+
+* ```
+    mvn package docker:build -DpushImage
+    docker run -p 8080:8080 -t springio/todo-spring-boot  
+  ```
