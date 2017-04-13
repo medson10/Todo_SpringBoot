@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origin = "*")
 public class MainController {
 
 
