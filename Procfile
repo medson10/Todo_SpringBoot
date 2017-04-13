@@ -1,1 +1,1 @@
-web: java -jar target/*.jar
+web: java $JAVA_OPTS -cp target/classes:target/m2e-wtp
