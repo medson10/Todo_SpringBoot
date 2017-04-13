@@ -3,6 +3,7 @@ package api.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin
 @RestController
 public class MainController {
 
@@ -11,5 +12,5 @@ public class MainController {
         return "Hello World";
     }
 
-    
+
 }
