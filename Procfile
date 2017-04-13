@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/m2e-wtp
+web: java $JAVA_OPTS -Dserver.port=$PORT -jar
