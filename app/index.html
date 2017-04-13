@@ -81,7 +81,7 @@
             },
             methods: {
                 getMembers() {
-                    this.$http.get('http://localhost:8080/member/', (data) => {
+                    this.$http.get('https://todo-spring-boot.herokuapp.com/member', (data) => {
                         this.data.members = data;
                         console.log(this.data.members);
                     })
@@ -93,7 +93,7 @@
                     });
                 },
                 saveMember(member) {
-                    this.$http.post('http://localhost:8080/member/', member);
+                    this.$http.post('https://todo-spring-boot.herokuapp.com/member', member);
                 }
                 //editMember -> this.$http.put('rota/:id', member)
                 //deleteMember -> this.$http.delete('rota/:id')
