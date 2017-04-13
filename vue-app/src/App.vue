@@ -14,7 +14,7 @@
               </div>
 
               <button type="button" class="btn btn-primary"
-                      v-on-click="">
+                      v-on:click="">
                   Salvar
               </button>
 
