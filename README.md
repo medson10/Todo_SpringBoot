@@ -8,6 +8,8 @@ A Todo Api built with Spring Boot
 * Java
 * Maven
 * Spring
+* Docker
+* Docker-compose
 
 ## How to run
 
@@ -20,4 +22,10 @@ A Todo Api built with Spring Boot
 * ```
     mvn package docker:build -DpushImage
     docker run -p 8080:8080 -t springio/todo-spring-boot  
+  ```
+
+## How to run with docker-compose
+
+* ```
+    docker-compose up
   ```
