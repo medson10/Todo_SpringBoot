@@ -10,6 +10,7 @@ public class MainController {
 
 
     @RequestMapping("/")
+    @CrossOrigin(origins = "*")
     public String index() {
         return "Hello World";
     }
