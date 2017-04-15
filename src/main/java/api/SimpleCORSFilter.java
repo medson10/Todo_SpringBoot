@@ -10,19 +10,34 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 
+
 @Component
-public class SimpleCORSFilter implements Filter {
+// @Order(Ordered.HIGHEST_PRECEDENCE)
+public class SimpleCorsFilter implements Filter {
+  public SimpleCorsFilter() {}
 
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-        HttpServletResponse response = (HttpServletResponse) res;
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
-        response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        chain.doFilter(req, res);
+  @Override
+  public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
+      throws IOException, ServletException {
+    HttpServletResponse response = (HttpServletResponse) res;
+    HttpServletRequest request = (HttpServletRequest) req;
+
+    response.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+    response.setHeader("Access-Control-Allow-Credentials", "true");
+    response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+    response.setHeader("Access-Control-Max-Age", "3600");
+    response.setHeader("Access-Control-Allow-Headers", "x-requested-with, authorization");
+
+    if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+      response.setStatus(HttpServletResponse.SC_OK);
+    } else {
+      chain.doFilter(req, res);
     }
+  }
 
-    public void init(FilterConfig filterConfig) {}
+  @Override
+  public void init(FilterConfig filterConfig) {}
 
-    public void destroy() {}
+  @Override
+  public void destroy() {}
 }
