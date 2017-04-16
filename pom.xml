@@ -68,14 +68,14 @@
                   </resources>
                   <pushImage>false</pushImage>
               </configuration>
-              <executions>
+              <!-- <executions>
                 <execution>
                   <id>build-image</id>
                   <phase>package</phase>
                   <goals>
                     <goal>build</goal>
                   </goals>
-                </execution>
+                </execution> -->
               </executions>
             </plugin>
         </plugins>
