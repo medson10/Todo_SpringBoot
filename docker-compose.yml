@@ -1,6 +1,6 @@
 version: '2'
 services:
-  server:
+  web:
     image: springio/todo-spring-boot
     ports:
      - "8080:8080"
