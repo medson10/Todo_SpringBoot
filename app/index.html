@@ -81,19 +81,21 @@
             },
             methods: {
                 getMembers() {
-                    this.$http.get('https://todo-spring-boot.herokuapp.com/member', (data) => {
-                        this.data.members = data;
-                        console.log(this.data.members);
-                    })
+                    this.$http.get('http://todo-spring-boot-testit.herokuapp.com/member')
                     .then((d) => {
-                        console.log(d);
+                        this.members.push(...d.data._embedded.member);
                     })
                     .catch((e) => {
                         console.log(e);
                     });
                 },
                 saveMember(member) {
-                    this.$http.post('https://todo-spring-boot.herokuapp.com/member', member);
+                    this.$http.post('http://todo-spring-boot-testit.herokuapp.com/member', member)
+                    .then(d => {
+                        this.members.push(member);
+                    }, e => {
+                      console.log(e);
+                    });
                 }
                 //editMember -> this.$http.put('rota/:id', member)
                 //deleteMember -> this.$http.delete('rota/:id')
