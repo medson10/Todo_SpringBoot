@@ -23,11 +23,12 @@
                 </div>
 
                 <button type="button" class="btn btn-primary"
-                        v-on:click="saveMember(member)">
+                        v-on:click="editing ? updateMember(member) : createMember(member)">
                     Salvar
                 </button>
 
-                <button type="button" class="btn btn-danger">
+                <button type="button" class="btn btn-danger"
+                        v-on:click="cleanMember()">
                         Cancelar
                 </button>
             </form>
@@ -52,12 +53,14 @@
                             <td >{{m.name}}</td>
                             <td >{{m.age}}</td>
                             <td>
-                                <button type="button" name="editar" class="btn btn-warning">
+                                <button type="button" name="editar" class="btn btn-warning"
+                                        v-on:click="editMember(m)">
                                     Editar
                                 </button>
                             </td>
                             <td>
-                                <button type="button" name="cancelar" class="btn btn-danger">
+                                <button type="button" name="cancelar" class="btn btn-danger"
+                                        v-on:click="deleteMember(m)">
                                     Excluir
                                 </button>
                             </td>
@@ -70,6 +73,8 @@
     </div>
 
     <script>
+        const apiUrl = 'https://todo-spring-boot-testit.herokuapp.com/';
+
         let app = new Vue({
             el: '#app',
             data: {
@@ -77,32 +82,66 @@
                     name: '',
                     age: ''
                 },
-                members: []
+                members: [],
+                editing: false,
+                memberUrl: '' //TODO: Check if this is the best way
             },
             methods: {
+                cleanMember() { //TODO: Refactoring
+                    this.member.name = '';
+                    this.member.age = '';
+                    this.memberUrl = '';
+                    this.editing = false;
+                },
                 getMembers() {
-                    this.$http.get('http://todo-spring-boot-testit.herokuapp.com/member')
+                    this.$http.get(`${apiUrl}/member`)
                     .then((d) => {
-                        this.members.push(...d.data._embedded.member);
+                        this.members = d.data._embedded.member;
                     })
                     .catch((e) => {
                         console.log(e);
                     });
                 },
-                saveMember(member) {
-                    this.$http.post('http://todo-spring-boot-testit.herokuapp.com/member', member)
-                    .then(d => {
-                        this.members.push(member);
+                createMember(member) {
+                    this.$http.post(`${apiUrl}/member`, member)
+                    .then(data => {
+                        this.cleanMember();
+                        this.members.push(data.body);
+                    }, e => {
+                      console.log(e);
+                    });
+                },
+                editMember(member) { //TODO: Refactoring
+                    this.editing = true;
+                    this.memberUrl = member._links.self.href;
+                    this.member = cloneObj(member);
+                },
+                updateMember(member) {
+                    this.$http.put(this.memberUrl, member)
+                    .then(data => {
+                        this.cleanMember();
+                        this.getMembers();
+                    }, e => {
+                      console.log(e);
+                  });
+                },
+                deleteMember(member) {
+                    this.memberUrl = member._links.self.href; //TODO: Refactoring
+                    this.$http.delete(this.memberUrl)
+                    .then(data => {
+                        this.getMembers();
                     }, e => {
                       console.log(e);
                     });
                 }
-                //editMember -> this.$http.put('rota/:id', member)
-                //deleteMember -> this.$http.delete('rota/:id')
             }
         });
 
         app.getMembers();
+
+        function cloneObj(object) {
+            return JSON.parse(JSON.stringify(object));
+        }
     </script>
 </body>
 </html>
